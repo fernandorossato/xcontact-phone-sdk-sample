@@ -10,9 +10,9 @@ const state = reactive({
 })
 
 const config = {
-  server: 'netwallws.xcontactcenter.com.br',
-  ramal: '1000',
-  senha: 'DGXpRB2ZjMt',
+  server: process.env.XC_HOST,
+  ramal: process.env.XC_RAMAL,
+  senha: process.env.XC_SENHA,
 }
 
 let client = null
