@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-toolbar-title> Netwall phone </q-toolbar-title>
+        <q-toolbar-title> Xcontact phone </q-toolbar-title>
 
         <div>Status: {{ status }}</div>
       </q-toolbar>

@@ -22,7 +22,7 @@ export default function useWebRTC() {
     const baseUrl = config.server + ':8089'
 
     const registerOptions = {
-      userAgent: `Xcontact-Netwall 1.0`,
+      userAgent: `Xcontact-phone 1.0`,
       hackWssInTransport: true,
       account: {
         user: config.ramal,
@@ -33,7 +33,7 @@ export default function useWebRTC() {
       transport: {
         wsServers: `wss://${baseUrl}/ws`,
         iceServers: [],
-        userAgentString: `Xcontact-Netwall 1.0`,
+        userAgentString: `Xcontact-phone 1.0`,
       },
       media: {
         input: {
@@ -62,6 +62,21 @@ export default function useWebRTC() {
       } else {
         state.status = 'Desconectado'
       }
+    })
+
+    client.on('invite', (invite) => {
+      console.log('incomingCall', invite)
+      state.incall = true
+      state.session = invite.session
+
+      // Auto atender
+      invite.session.accept()
+
+      invite.session.on('terminated', (dados) => {
+        console.log('Chamada terminada', dados)
+        state.incall = false
+        state.callid = null
+      })
     })
   }
 
